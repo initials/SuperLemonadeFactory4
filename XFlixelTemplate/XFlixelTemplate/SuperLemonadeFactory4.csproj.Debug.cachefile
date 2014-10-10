@@ -1,3 +1,9 @@
+Content\lemonade_strip_100.xnb
+Content\lemonade_strip_100_shadow.xnb
+Content\lemonade_strip_200.xnb
+Content\lemonade_strip_200_shadow.xnb
+Content\lemonade_strip_300.xnb
+Content\lemonade_strip_300_shadow.xnb
 OgmoEditor2\OgmoEditor2Project.oep
 OgmoEditor2\SportsGround.oel
 Content\flixel\autotiles.xnb
@@ -64,4 +70,6 @@ Content\buttons\MapWhiteGameboy.xnb
 Content\flixel\autotilesIsland_16x16.xnb
 Content\flixel\autotilesIsland.xnb
 Content\initials\boats.xnb
+Content\flixel\transitionBlack_40x40.xnb
+Content\initials\healthBar.xnb
 GAMESETTINGS.txt

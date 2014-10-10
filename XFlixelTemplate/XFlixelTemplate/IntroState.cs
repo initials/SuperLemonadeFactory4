@@ -18,7 +18,15 @@ namespace SuperLemonadeFactory4
             FlxG.backColor = Color.Purple;
             base.create();
 
-
+            FlxSprite robot = new FlxSprite(0, 0);
+            robot.loadGraphic("surt/race_or_die", true, false, 20, 20);
+            robot.addAnimation("static", robot.generateFrameNumbersBetween(0,40), 12, true);
+            robot.play("static");
+            robot.angle = 0;
+            robot.width = 32;
+            robot.height = 32;
+            robot.setOffset(12, 12);
+            add(robot);
 
         }
 
