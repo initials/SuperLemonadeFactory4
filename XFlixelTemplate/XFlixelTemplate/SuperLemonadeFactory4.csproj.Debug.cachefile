@@ -4,6 +4,15 @@ Content\lemonade_strip_200.xnb
 Content\lemonade_strip_200_shadow.xnb
 Content\lemonade_strip_300.xnb
 Content\lemonade_strip_300_shadow.xnb
+Content\characters.xnb
+Content\CrateWithLabel.xnb
+Content\CrateWithLabelBlank.xnb
+Content\LargeCrate.xnb
+Content\level1_specialPlatform.xnb
+Content\sugarBags.xnb
+Content\sugarBagsAndCrates.xnb
+Content\level1_specialBlock.xnb
+Content\characters.csv
 OgmoEditor2\OgmoEditor2Project.oep
 OgmoEditor2\SportsGround.oel
 Content\flixel\autotiles.xnb

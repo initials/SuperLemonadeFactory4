@@ -8,25 +8,37 @@ using org.flixel;
 using System.Linq;
 using System.Xml.Linq;
 
+using SuperLemonadeFactory4.characters;
+
 namespace SuperLemonadeFactory4
 {
     public class IntroState : FlxState
     {
 
+        FlxGroup charactersGrp;
+        FlxGroup blocksGrp;
+
         override public void create()
         {
-            FlxG.backColor = Color.Purple;
+            FlxG.backColor = Color.DarkSlateBlue;
             base.create();
 
-            FlxSprite robot = new FlxSprite(0, 0);
-            robot.loadGraphic("surt/race_or_die", true, false, 20, 20);
+            FlxTileblock t = new FlxTileblock(0, 300, 320, 64);
+            t.auto = FlxTileblock.HUDELEMENT;
+            t.loadTiles("level1_specialBlock", 13, 13, 0);
+
+            add(t);
+
+
+            FlxSprite robot = new FlxSprite(30, 30);
+            robot.loadGraphic("lemonade_strip_100", true, false, 25, 25);
             robot.addAnimation("static", robot.generateFrameNumbersBetween(0,40), 12, true);
             robot.play("static");
-            robot.angle = 0;
-            robot.width = 32;
-            robot.height = 32;
-            robot.setOffset(12, 12);
             add(robot);
+
+            Andre andre = new Andre(0, 0);
+            add(andre);
+
 
         }
 
