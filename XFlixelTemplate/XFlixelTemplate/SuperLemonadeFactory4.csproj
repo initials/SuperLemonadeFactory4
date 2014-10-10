@@ -88,6 +88,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\XNAFlixel\XFlixel\Farseer Physics Engine 3.5\Farseer Physics XNA.csproj">
+      <Project>{0A850700-1ABB-4288-A391-6726B90EBEB9}</Project>
+      <Name>Farseer Physics XNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\XNAFlixel\XFlixel\XFlixel.csproj">
       <Project>{50463AEB-DA30-46D5-B01B-93F9C42F5765}</Project>
       <Name>XFlixel</Name>
