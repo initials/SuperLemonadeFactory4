@@ -27,14 +27,38 @@ namespace SuperLemonadeFactory4.characters
             addAnimation("run", new int[] { 6,7,8,9,10,11 }, 12, true);
 
             play("run");
+
+            acceleration.Y = 222;
+            
+        }
+
+        public override void hitLeft(FlxObject Contact, float Velocity)
+        {
+            velocity.Y = -1350;
+
+            base.hitLeft(Contact, Velocity);
+        }
+
+        public override void hitRight(FlxObject Contact, float Velocity)
+        {
+            velocity.Y = -1350;
+
+            base.hitRight(Contact, Velocity);
+        }
+
+        public override void hitSide(FlxObject Contact, float Velocity)
+        {
+
+            base.hitSide(Contact, Velocity);
         }
 
         override public void update()
         {
 
+            
 
             base.update();
-
+            velocity.X = 100;
         }
 
 

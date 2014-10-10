@@ -23,28 +23,39 @@ namespace SuperLemonadeFactory4
             FlxG.backColor = Color.DarkSlateBlue;
             base.create();
 
-            FlxTileblock t = new FlxTileblock(0, 300, 320, 64);
-            t.auto = FlxTileblock.HUDELEMENT;
-            t.loadTiles("level1_specialBlock", 13, 13, 0);
-
-            add(t);
+            charactersGrp = new FlxGroup();
+            blocksGrp = new FlxGroup();
 
 
-            FlxSprite robot = new FlxSprite(30, 30);
-            robot.loadGraphic("lemonade_strip_100", true, false, 25, 25);
-            robot.addAnimation("static", robot.generateFrameNumbersBetween(0,40), 12, true);
-            robot.play("static");
-            add(robot);
+            FlxCaveGeneratorExt caveExt = new FlxCaveGeneratorExt(100, 60, 0.48f, 5);
+            string[,] caveLevel = caveExt.generateCaveLevel();
+
+            //Optional step to print cave to the console.
+            //caveExt.printCave(caveLevel);
+
+            string newMap = caveExt.convertMultiArrayStringToString(caveLevel);
+
+            //Create a tilemap and assign the cave map.
+            FlxTilemap tiles = new FlxTilemap();
+            tiles.auto = FlxTilemap.AUTO;
+            tiles.indexOffset = 0;
+            tiles.loadMap(newMap, FlxG.Content.Load<Texture2D>("level1_tiles"), 10, 10);
+            tiles.setScrollFactors(0, 0);
+            tiles.boundingBoxOverride = true;
+            blocksGrp.add(tiles);
 
             Andre andre = new Andre(0, 0);
-            add(andre);
+            charactersGrp.add(andre);
 
+            add(charactersGrp);
+            add(blocksGrp);
 
         }
 
         override public void update()
         {
 
+            FlxU.collide(charactersGrp, blocksGrp);
 
 
 
