@@ -21,12 +21,14 @@ namespace SuperLemonadeFactory4.characters
 
             Console.WriteLine(anims);
 
+            loadAnimationsFromGraphicsGaleCSV("content/characters.csv");
+
             loadGraphic(FlxG.Content.Load<Texture2D>("characters"), true, false, 25, 25);
 
             addAnimation("idle", new int[] { 1 }, 12, true);
-            addAnimation("run", new int[] { 6,7,8,9,10,11 }, 12, true);
+            //addAnimation("run", new int[] { 6,7,8,9,10,11 }, 12, true);
 
-            play("run");
+            //play("run");
 
             acceleration.Y = 222;
             
