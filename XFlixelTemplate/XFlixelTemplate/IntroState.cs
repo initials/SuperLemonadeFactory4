@@ -58,8 +58,8 @@ namespace SuperLemonadeFactory4
 
             //Create a tilemap and assign the cave map.
             FlxTilemap tiles = new FlxTilemap();
-            tiles.auto = FlxTilemap.STRING;
-            tiles.indexOffset = 0;
+            tiles.auto = FlxTilemap.AUTO;
+            tiles.indexOffset = -1;
             tiles.loadMap(levelAttrs["grid"], FlxG.Content.Load<Texture2D>("level1_tiles"), 10, 10);
             tiles.setScrollFactors(0, 0);
             tiles.boundingBoxOverride = true;
@@ -73,7 +73,7 @@ namespace SuperLemonadeFactory4
 
                 if (nodes["Name"] == "elevator")
                 {
-                    FlxMovingPlatform block = new FlxMovingPlatform(Convert.ToInt32(nodes["x"]), Convert.ToInt32(nodes["y"]));
+                    MovingBlock block = new MovingBlock(Convert.ToInt32(nodes["x"]), Convert.ToInt32(nodes["y"]));
                     block.loadGraphic("level1_specialBlock", false, true, 40, 20);
                     movingBlocksGrp.add(block);
 
@@ -202,13 +202,15 @@ namespace SuperLemonadeFactory4
 
             if (FlxControl.ACTIONJUSTPRESSED)
             {
-                forward = !forward;
 
-                foreach (var block in movingBlocksGrp.members)
+
+                foreach (MovingBlock block in movingBlocksGrp.members)
                 {
-                    if (forward && block.velocity.X==0 && block.velocity.Y==0)
+                    block.forward = !block.forward;
+
+                    if (block.forward && block.velocity.X == 0 && block.velocity.Y == 0)
                         block.startFollowingPath(FlxObject.PATH_FORWARD);
-                    if (!forward && block.velocity.X == 0 && block.velocity.Y == 0)
+                    if (!block.forward && block.velocity.X == 0 && block.velocity.Y == 0)
                         block.startFollowingPath(FlxObject.PATH_BACKWARD);
                 }
                 

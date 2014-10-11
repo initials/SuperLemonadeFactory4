@@ -22,7 +22,7 @@ namespace SuperLemonadeFactory4.characters
             loadAnimationsFromGraphicsGaleCSV("content/characters.csv");
             play("inspector_run");
 
-            this.runSpeed = 125;
+            this.runSpeed = 95;
         }
 
         override public void update()

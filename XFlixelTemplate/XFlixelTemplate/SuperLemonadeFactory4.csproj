@@ -81,6 +81,7 @@
     <Compile Include="characters\Worker.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="IntroState.cs" />
+    <Compile Include="MovingBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

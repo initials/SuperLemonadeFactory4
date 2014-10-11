@@ -71,7 +71,7 @@ namespace SuperLemonadeFactory4.characters
 
             //Console.WriteLine(Contact.GetType().ToString());
 
-            if (Contact.GetType().ToString() == "org.flixel.FlxMovingPlatform" && (Contact.velocity.Y != 0 || Contact.velocity.X != 0))
+            if (Contact.GetType().ToString() == "SuperLemonadeFactory4.MovingBlock" && (Contact.velocity.Y != 0 || Contact.velocity.X != 0))
             {
                 //if (this.x > (Contact.x + 12) && this.x < (Contact.x + Contact.width - 12))
                 shouldStop = true;
