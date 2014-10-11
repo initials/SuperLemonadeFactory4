@@ -1,1 +1,2 @@
 E:\VisualStudio2010\SuperLemonadeFactory4\XFlixelTemplate\XFlixelTemplateContent\obj\x86\Debug\SuperLemonadeFactory4Content.contentprojResolveAssemblyReference.cache
+C:\Users\Shane\Documents\Visual Studio 2010\Projects\SuperLemonadeFactory4\XFlixelTemplate\XFlixelTemplateContent\obj\x86\Debug\SuperLemonadeFactory4Content.contentprojResolveAssemblyReference.cache
