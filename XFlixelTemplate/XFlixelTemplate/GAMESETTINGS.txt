@@ -1,5 +1,5 @@
-﻿x=96
-y=54
+﻿x=960
+y=540
 fullscreen=0
 zoom=1
 

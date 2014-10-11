@@ -26,26 +26,37 @@ namespace SuperLemonadeFactory4.characters
             loadGraphic(FlxG.Content.Load<Texture2D>("characters"), true, false, 25, 25);
 
             addAnimation("idle", new int[] { 1 }, 12, true);
-            //addAnimation("run", new int[] { 6,7,8,9,10,11 }, 12, true);
+            addAnimation("run", new int[] { 6,7,8,9,10,11 }, 12, true);
 
-            //play("run");
+            play("run");
 
-            acceleration.Y = 222;
+            acceleration.Y = 980;
             
         }
 
         public override void hitLeft(FlxObject Contact, float Velocity)
         {
-            velocity.Y = -1350;
+
+            Console.WriteLine("Hitting Left");
+
+
+            
 
             base.hitLeft(Contact, Velocity);
+
+            velocity.Y -=50;
         }
 
         public override void hitRight(FlxObject Contact, float Velocity)
         {
-            velocity.Y = -1350;
+            Console.WriteLine("Hitting Right");
+
+
+            
 
             base.hitRight(Contact, Velocity);
+
+            velocity.Y-=50;
         }
 
         public override void hitSide(FlxObject Contact, float Velocity)
@@ -56,11 +67,16 @@ namespace SuperLemonadeFactory4.characters
 
         override public void update()
         {
+            velocity.X = 100;
 
+            if (FlxControl.ACTIONJUSTPRESSED)
+            {
+                velocity.Y -= 123;
+            }
             
 
             base.update();
-            velocity.X = 100;
+            
         }
 
 
