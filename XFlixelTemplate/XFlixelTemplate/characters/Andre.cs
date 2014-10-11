@@ -10,48 +10,27 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SuperLemonadeFactory4.characters
 {
-    class Andre : FlxSprite
+    class Andre : BaseActor
     {
 
         public Andre(int xPos, int yPos)
             : base(xPos, yPos)
         {
-
-            //string anims = FlxU.loadFromDevice("content/characters.csv");
-
-            //Console.WriteLine(anims);
-
-            //loadAnimationsFromGraphicsGaleCSV("content/characters.csv");
+            name = "andre";
 
             loadGraphic(FlxG.Content.Load<Texture2D>("characters"), true, false, 25, 25);
-
-            //addAnimation("idle", new int[] { 1 }, 12, true);
-            //addAnimation("run", new int[] { 6,7,8,9,10,11 }, 12, true);
-
             loadAnimationsFromGraphicsGaleCSV("content/characters.csv");
-
-            foreach (var item in animations)
-            {
-                Console.WriteLine(item.name);
-            }
-
             play("andre_run");
 
-            acceleration.Y = 980;
-            
+            this.runSpeed = 75;
+
         }
 
         public override void hitLeft(FlxObject Contact, float Velocity)
         {
-
-            //Console.WriteLine("Hitting Left");
-
-
-            
-
             base.hitLeft(Contact, Velocity);
 
-            velocity.Y -=50;
+            //velocity.Y -=50;
         }
 
         public override void hitRight(FlxObject Contact, float Velocity)
@@ -63,7 +42,7 @@ namespace SuperLemonadeFactory4.characters
 
             base.hitRight(Contact, Velocity);
 
-            velocity.Y-=50;
+            //velocity.Y-=50;
         }
 
         public override void hitSide(FlxObject Contact, float Velocity)
@@ -74,12 +53,7 @@ namespace SuperLemonadeFactory4.characters
 
         override public void update()
         {
-            velocity.X = 100;
-
-            if (FlxControl.ACTIONJUSTPRESSED)
-            {
-                velocity.Y -= 123;
-            }
+            
             
 
             base.update();
