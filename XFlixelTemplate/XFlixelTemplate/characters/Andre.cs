@@ -23,7 +23,10 @@ namespace SuperLemonadeFactory4.characters
             play("andre_run");
 
             this.runSpeed = 75;
+            width = 10;
+            height = 10;
 
+            setOffset(8, 15);
         }
 
         public override void hitLeft(FlxObject Contact, float Velocity)

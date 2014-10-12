@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bottle.cs" />
     <Compile Include="characters\Andre.cs" />
     <Compile Include="characters\Army.cs" />
     <Compile Include="characters\BaseActor.cs" />

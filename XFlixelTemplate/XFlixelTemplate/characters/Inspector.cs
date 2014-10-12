@@ -23,6 +23,10 @@ namespace SuperLemonadeFactory4.characters
             play("inspector_run");
 
             this.runSpeed = 95;
+            width = 10;
+            height = 10;
+
+            setOffset(8, 15);
         }
 
         override public void update()

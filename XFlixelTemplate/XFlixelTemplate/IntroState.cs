@@ -21,8 +21,6 @@ namespace SuperLemonadeFactory4
         FlxGroup doors;
         FlxGroup crates;
 
-        bool forward;
-
         override public void create()
         {
             FlxG.backColor = FlxColor.ToColor("dedbc3");
@@ -33,8 +31,6 @@ namespace SuperLemonadeFactory4
             movingBlocksGrp = new FlxGroup();
             doors = new FlxGroup();
             crates = new FlxGroup();
-
-            forward = true;
 
             FlxCaveGeneratorExt caveExt = new FlxCaveGeneratorExt(100, 60, 0.48f, 5);
             string[,] caveLevel = caveExt.generateCaveLevel();
@@ -58,11 +54,13 @@ namespace SuperLemonadeFactory4
 
             //Create a tilemap and assign the cave map.
             FlxTilemap tiles = new FlxTilemap();
+            tiles.useExtraMiddleTiles = false;
             tiles.auto = FlxTilemap.AUTO;
             tiles.indexOffset = -1;
             tiles.loadMap(levelAttrs["grid"], FlxG.Content.Load<Texture2D>("level1_tiles"), 10, 10);
             tiles.setScrollFactors(0, 0);
             tiles.boundingBoxOverride = true;
+            
             blocksGrp.add(tiles);
 
 
@@ -150,8 +148,14 @@ namespace SuperLemonadeFactory4
 
             for (int i = 0; i < 10; i++)
             {
-                SmallCrate c = new SmallCrate((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height));
+                SmallCrate c = new SmallCrate((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height-100));
                 crates.add(c);
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                Bottle b = new Bottle((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height-100));
+                crates.add(b);
             }
 
             add(doors);
@@ -167,7 +171,7 @@ namespace SuperLemonadeFactory4
 
         public bool overlappedCrate(object sender, FlxSpriteCollisionEvent e)
         {
-            e.Object2.reset((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height));
+            e.Object2.reset((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height-100));
             FlxG.score++;
 
 
@@ -190,6 +194,10 @@ namespace SuperLemonadeFactory4
 
         override public void update()
         {
+            if (FlxG.keys.justPressed(Keys.B))
+            {
+                FlxG.showBounds = !FlxG.showBounds ;
+            }
 
             FlxG.setHudText(1, FlxG.score.ToString() );
 

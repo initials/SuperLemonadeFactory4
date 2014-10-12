@@ -23,7 +23,10 @@ namespace SuperLemonadeFactory4.characters
             play("chef_run");
 
             this.runSpeed = 85;
+            width = 10;
+            height = 10;
 
+            setOffset(8, 15);
         }
 
         override public void update()

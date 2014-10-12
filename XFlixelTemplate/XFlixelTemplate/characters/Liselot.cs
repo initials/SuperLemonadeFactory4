@@ -22,7 +22,7 @@ namespace SuperLemonadeFactory4.characters
             loadAnimationsFromGraphicsGaleCSV("content/characters.csv");
             play("liselot_run");
 
-            this.runSpeed = 95;
+            this.runSpeed = 60;
 
             width = 10;
             height = 10;

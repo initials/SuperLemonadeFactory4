@@ -62,6 +62,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bottle.png">
+      <Name>bottle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="characters.csv">
       <Name>characters</Name>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

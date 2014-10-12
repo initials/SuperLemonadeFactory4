@@ -23,6 +23,10 @@ namespace SuperLemonadeFactory4.characters
             play("worker_run");
 
             this.runSpeed = 40;
+            width = 10;
+            height = 10;
+
+            setOffset(8, 15);
 
         }
 

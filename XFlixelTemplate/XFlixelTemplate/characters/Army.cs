@@ -23,6 +23,10 @@ namespace SuperLemonadeFactory4.characters
             play("army_run");
 
             this.runSpeed = 55;
+            width = 10;
+            height = 10;
+
+            setOffset(8, 15);
         }
 
         override public void update()
