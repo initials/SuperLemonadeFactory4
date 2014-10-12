@@ -131,8 +131,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="level1_tiles.png">
-      <Name>level1_tiles</Name>
+    <Compile Include="level1_autotiles.png">
+      <Name>level1_autotiles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -143,6 +143,16 @@
     </Compile>
     <Compile Include="smallCrateExplode.png">
       <Name>smallCrateExplode</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="fruit.png">
+      <Name>fruit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="level1_tiles.png">
+      <Name>level1_tiles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

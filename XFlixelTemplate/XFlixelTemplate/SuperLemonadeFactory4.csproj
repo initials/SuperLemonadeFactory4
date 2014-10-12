@@ -81,6 +81,7 @@
     <Compile Include="characters\Liselot.cs" />
     <Compile Include="characters\Worker.cs" />
     <Compile Include="Door.cs" />
+    <Compile Include="Fruit.cs" />
     <Compile Include="IntroState.cs" />
     <Compile Include="MovingBlock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

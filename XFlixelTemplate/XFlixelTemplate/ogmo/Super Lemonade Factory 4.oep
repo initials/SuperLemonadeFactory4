@@ -16,7 +16,7 @@
     <Width>6400</Width>
     <Height>4800</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\Shane\Documents\Visual Studio 2010\Projects\SuperLemonadeFactory4\XFlixelTemplate\XFlixelTemplate\ogmo\Super Lemonade Factory 4.oep</Filename>
+  <Filename>E:\VisualStudio2010\SuperLemonadeFactory4\XFlixelTemplate\XFlixelTemplate\ogmo\Super Lemonade Factory 4.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>false</CameraEnabled>
   <CameraSize>
@@ -37,7 +37,7 @@
         <Y>1</Y>
       </ScrollFactor>
       <Color A="255" R="0" G="0" B="0" />
-      <ExportMode>CSV</ExportMode>
+      <ExportMode>Rectangles</ExportMode>
     </LayerDefinition>
     <LayerDefinition xsi:type="EntityLayerDefinition">
       <Name>tileblocks</Name>

@@ -10,6 +10,13 @@ using System.Xml.Linq;
 
 using SuperLemonadeFactory4.characters;
 
+using FarseerPhysics.Common;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics.Contacts;
+using FarseerPhysics;
+
 namespace SuperLemonadeFactory4
 {
     public class IntroState : FlxState
@@ -21,49 +28,52 @@ namespace SuperLemonadeFactory4
         FlxGroup doors;
         FlxGroup crates;
 
+        World _world;
+
         override public void create()
         {
             FlxG.backColor = FlxColor.ToColor("dedbc3");
             base.create();
+
+            _world = new World(new Vector2(0, 98.0f));
 
             charactersGrp = new FlxGroup();
             blocksGrp = new FlxGroup();
             movingBlocksGrp = new FlxGroup();
             doors = new FlxGroup();
             crates = new FlxGroup();
-
-            FlxCaveGeneratorExt caveExt = new FlxCaveGeneratorExt(100, 60, 0.48f, 5);
-            string[,] caveLevel = caveExt.generateCaveLevel();
-
-            //Optional step to print cave to the console.
-            //caveExt.printCave(caveLevel);
-
-            string newMap = caveExt.convertMultiArrayStringToString(caveLevel);
-
-
-            Dictionary<string,string> levelAttrs = FlxXMLReader.readAttributesFromOelFile("ogmo/level1.oel", "level/grid");
-
-            //destructableTilemap = new FlxTilemap();
-            //destructableTilemap.auto = FlxTilemap.STRING;
-            //destructableTilemap.loadMap(destructableAttrs["DestructableTerrain"], FlxG.Content.Load<Texture2D>("fourchambers/" + destructableAttrs["tileset"]), FourChambers_Globals.TILE_SIZE_X, FourChambers_Globals.TILE_SIZE_Y);
-            //destructableTilemap.boundingBoxOverride = true;
-            //allLevelTiles.add(destructableTilemap);
-            //destructableTilemap.collideMin = 0;
-            //destructableTilemap.collideMax = 21;
             
 
-            //Create a tilemap and assign the cave map.
-            FlxTilemap tiles = new FlxTilemap();
-            tiles.useExtraMiddleTiles = false;
-            tiles.auto = FlxTilemap.AUTO;
-            tiles.indexOffset = -1;
-            tiles.loadMap(levelAttrs["grid"], FlxG.Content.Load<Texture2D>("level1_tiles"), 10, 10);
-            tiles.setScrollFactors(0, 0);
-            tiles.boundingBoxOverride = true;
+            //Dictionary<string,string> levelAttrs = FlxXMLReader.readAttributesFromOelFile("ogmo/level1.oel", "level/grid");
+            //FlxTilemap tiles = new FlxTilemap();
+            //tiles.useExtraMiddleTiles = false;
+            //tiles.auto = FlxTilemap.AUTO;
+            //tiles.indexOffset = -1;
+            //tiles.loadMap(levelAttrs["grid"], FlxG.Content.Load<Texture2D>("level1_tiles"), 10, 10);
+            //tiles.setScrollFactors(0, 0);
+            //tiles.boundingBoxOverride = true;
             
-            blocksGrp.add(tiles);
+            //blocksGrp.add(tiles);
+
+            List<Dictionary<string, string>> lblocks = FlxXMLReader.readNodesFromOelFile("ogmo/level1.oel", "level/grid");
+            foreach (Dictionary<string, string> nodes in lblocks)
+            {
+                FarTileblock t = new FarTileblock(Convert.ToInt32(nodes["x"]) + (Convert.ToInt32(nodes["w"]) / 2), Convert.ToInt32(nodes["y"]) + (Convert.ToInt32(nodes["h"]) / 2), Convert.ToInt32(nodes["w"]), Convert.ToInt32(nodes["h"]), _world);
+                t.auto = FlxTilemap.AUTO;
+                t.loadTiles("level1_tiles", 10, 10, 0);
+                blocksGrp.add(t);
+                t._body.BodyType = BodyType.Static;
 
 
+                FlxTileblock t2 = new FlxTileblock(Convert.ToInt32(nodes["x"]), Convert.ToInt32(nodes["y"]), Convert.ToInt32(nodes["w"]), Convert.ToInt32(nodes["h"]));
+                t2.auto = FlxTilemap.AUTO;
+                t2.loadTiles("level1_tiles", 10, 10, 0);
+                blocksGrp.add(t2);
+
+
+
+
+            }
 
             List<Dictionary<string, string>> blocks = FlxXMLReader.readNodesFromOelFile("ogmo/level1.oel", "level/tileblocks");
             foreach (Dictionary<string, string> nodes in blocks)
@@ -146,17 +156,26 @@ namespace SuperLemonadeFactory4
             bg.loadTiles("level1_shelfTile", 80, 80, 0);
             add(bg);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 SmallCrate c = new SmallCrate((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height-100));
                 crates.add(c);
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Bottle b = new Bottle((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height-100));
                 crates.add(b);
             }
+            for (int i = 0; i < 55; i++)
+            {
+                Fruit f = new Fruit((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height - 100), _world);
+                f._body.ApplyLinearImpulse(new Vector2(20, 2120));
+
+
+                crates.add(f);
+            }
+
 
             add(doors);
             add(charactersGrp);
@@ -171,9 +190,35 @@ namespace SuperLemonadeFactory4
 
         public bool overlappedCrate(object sender, FlxSpriteCollisionEvent e)
         {
-            e.Object2.reset((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height-100));
+            
             FlxG.score++;
 
+            if (e.Object2.GetType().ToString().EndsWith("Fruit"))
+            {
+                ((Fruit)(e.Object2))._body.SetTransform(new Vector2((int)FlxU.random(0, 0), (int)FlxU.random(0, 0)), 0.0f);
+                //e.Object2.reset(-110, -110);
+                e.Object2.debugName = "repack";
+                ((Fruit)(e.Object2))._body.Enabled = false;
+
+
+            }
+            if (e.Object2.GetType().ToString().EndsWith("Crate"))
+            {
+                foreach (var item in crates.members)
+                {
+                    if (item.GetType().ToString().EndsWith("Fruit")) //&& item.debugName == "repack"
+                    {
+                        //e.Object2.reset(e.Object2.x, e.Object2.y);
+                        ((Fruit)(item))._body.SetTransform(new Vector2(e.Object2.x, e.Object2.y), 0.0f);
+                        item.debugName = "";
+                        ((Fruit)(item))._body.Enabled = true;
+
+                    }
+                }
+                e.Object2.reset((int)FlxU.random(0, FlxG.width), (int)FlxU.random(0, FlxG.height - 100));
+            }
+
+            
 
             return true;
         }
@@ -194,6 +239,8 @@ namespace SuperLemonadeFactory4
 
         override public void update()
         {
+            _world.Step(Math.Min((float)FlxG.elapsedAsGameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
+
             if (FlxG.keys.justPressed(Keys.B))
             {
                 FlxG.showBounds = !FlxG.showBounds ;
